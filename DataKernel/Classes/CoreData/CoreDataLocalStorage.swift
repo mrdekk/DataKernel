@@ -26,7 +26,8 @@ public class CoreDataLocalStorage: Storage {
             do {
                 try unitOfWork(context: context, save: { () -> Void  in
                     do {
-                        try context.save(recursively: true)
+                        // try context.save(recursively: true)
+                        try context.save()
                     }
                     catch {
                         _error = error
@@ -43,6 +44,12 @@ public class CoreDataLocalStorage: Storage {
         
         if let error = _error {
             throw error
+        }
+        
+        if let parent = context.parentContext {
+            parent.performBlock {
+                _ = try? parent.save()
+            }
         }
     }
     
