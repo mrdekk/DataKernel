@@ -166,18 +166,20 @@ extension NSManagedObjectContext: Context {
         guard let idesc: NSEntityDescription = desc else {
             throw DkErrors.InvalidEntityClass
         }
-        
-        if let pk = idesc.userInfo?["pk"] as? String {
-            let pkDesc = idesc.attributesByName[pk]
-            if let ipkDesc: NSAttributeDescription = pkDesc {
-                if ipkDesc.indexed {
-                    return pk
-                }
-            }
-            
-            assert(false, "pk found (\(pk)) but it is not indexed, that will be huge performance problems")
+
+        guard let pk = idesc.userInfo?["pk"] as? String else {
+            assert(false, "to work with DataKernel entity should have pk info in userInfo")
         }
         
-        assert(false, "to work with DataKernel entity should have pk info in userInfo")
+        let pkDesc = idesc.attributesByName[pk]
+        guard let ipkDesc: NSAttributeDescription = pkDesc else {
+            throw DkErrors.InvalidEntityClass
+        }
+
+        if !ipkDesc.indexed {
+            assert(false, "pk found (\(pk)) but it is not indexed, that will be huge performance problems")
+        }
+
+        return pk
     }
 }
