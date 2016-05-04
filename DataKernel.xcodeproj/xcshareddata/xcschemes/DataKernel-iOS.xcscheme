@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "94BB39051CD9B8AA001A2DBE"
-               BuildableName = "DataKernel-iOS.framework"
+               BuildableName = "DataKernel.framework"
                BlueprintName = "DataKernel-iOS"
                ReferencedContainer = "container:DataKernel.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "94BB39051CD9B8AA001A2DBE"
-            BuildableName = "DataKernel-iOS.framework"
+            BuildableName = "DataKernel.framework"
             BlueprintName = "DataKernel-iOS"
             ReferencedContainer = "container:DataKernel.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "94BB39051CD9B8AA001A2DBE"
-            BuildableName = "DataKernel-iOS.framework"
+            BuildableName = "DataKernel.framework"
             BlueprintName = "DataKernel-iOS"
             ReferencedContainer = "container:DataKernel.xcodeproj">
          </BuildableReference>
