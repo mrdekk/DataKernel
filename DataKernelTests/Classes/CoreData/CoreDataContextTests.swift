@@ -178,4 +178,33 @@ class CoreDataContextTests: XCTestCase {
         
         XCTAssertEqual(results2?.count, 0)
     }
+    
+    func testWipe() {
+        _ = try? storage?.perform(true, unitOfWork: { (context, save) -> Void in
+            let car: Car = try! context.create()
+            car.mark = "Honda"
+            car.model = "CRZ"
+            
+            let car2: Car = try! context.create()
+            car2.mark = "Honda"
+            car2.model = "Insight"
+            
+            save()
+        })
+        
+        let request: Request<Car> = Request().filter("mark", equalTo: "Honda")
+        let results = try! storage?.uiContext.fetch(request)
+        
+        XCTAssertEqual(results?.count, 2)
+        
+        _ = try? storage?.perform(true, unitOfWork: { (context, save) -> Void in
+            try! context.wipe(Car.self)
+            save()
+        })
+        
+        let results2 = try! storage?.uiContext.fetch(request)
+        
+        XCTAssertEqual(results2?.count, 0)
+        
+    }
 }

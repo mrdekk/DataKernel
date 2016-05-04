@@ -70,7 +70,7 @@
 		9461A3C01CD7D37D008EEC3C /* FileUtilsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtilsTests.swift; sourceTree = "<group>"; };
 		9461A3C21CD7D632008EEC3C /* RequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestTests.swift; sourceTree = "<group>"; };
 		9461A3C51CD7DA15008EEC3C /* CoreDataLocalStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataLocalStoreTests.swift; sourceTree = "<group>"; };
-		94BB39061CD9B8AA001A2DBE /* DataKernel-iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "DataKernel-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		94BB39061CD9B8AA001A2DBE /* DataKernel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DataKernel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		94BB39081CD9B8AA001A2DBE /* DataKernel-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DataKernel-iOS.h"; sourceTree = "<group>"; };
 		94BB390A1CD9B8AA001A2DBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94BB390E1CD9B8E7001A2DBE /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -195,7 +195,7 @@
 			children = (
 				94F74A6C1CD51764000F1F4D /* DataKernel.app */,
 				94F74A831CD51765000F1F4D /* DataKernelTests.xctest */,
-				94BB39061CD9B8AA001A2DBE /* DataKernel-iOS.framework */,
+				94BB39061CD9B8AA001A2DBE /* DataKernel.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -324,7 +324,7 @@
 			);
 			name = "DataKernel-iOS";
 			productName = "DataKernel-iOS";
-			productReference = 94BB39061CD9B8AA001A2DBE /* DataKernel-iOS.framework */;
+			productReference = 94BB39061CD9B8AA001A2DBE /* DataKernel.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		94F74A6B1CD51764000F1F4D /* DataKernel */ = {
@@ -720,6 +720,7 @@
 				94BB390C1CD9B8AA001A2DBE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		94F74A671CD51764000F1F4D /* Build configuration list for PBXProject "DataKernel" */ = {
 			isa = XCConfigurationList;

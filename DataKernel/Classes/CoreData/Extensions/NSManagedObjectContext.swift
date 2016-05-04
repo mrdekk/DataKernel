@@ -70,9 +70,18 @@ extension NSManagedObjectContext: Context {
     }
     
     public func wipe<E: Entity>(type: E.Type) throws {
-        let request = Request<E>(sort: nil, predicate: nil)
-        let entities = try fetchImpl(request, includeProps: false)
-        try remove(entities)
+        if #available(iOS 9, *) {
+            guard let entityClass = E.self as? NSManagedObject.Type else {
+                throw DkErrors.InvalidEntityClass
+            }
+            let request = NSFetchRequest(entityName: entityClass.entityName)
+            let requestDelete = NSBatchDeleteRequest(fetchRequest: request)
+            try executeRequest(requestDelete)
+        } else {
+            let request = Request<E>(sort: nil, predicate: nil)
+            let entities = try fetchImpl(request, includeProps: false)
+            try remove(entities)
+        }
     }
     
     
