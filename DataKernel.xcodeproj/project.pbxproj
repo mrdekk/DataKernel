@@ -15,6 +15,21 @@
 		9461A3C11CD7D37D008EEC3C /* FileUtilsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9461A3C01CD7D37D008EEC3C /* FileUtilsTests.swift */; };
 		9461A3C31CD7D632008EEC3C /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9461A3C21CD7D632008EEC3C /* RequestTests.swift */; };
 		9461A3C61CD7DA15008EEC3C /* CoreDataLocalStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9461A3C51CD7DA15008EEC3C /* CoreDataLocalStoreTests.swift */; };
+		94BB39091CD9B8AA001A2DBE /* DataKernel-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 94BB39081CD9B8AA001A2DBE /* DataKernel-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		94BB390F1CD9B8E7001A2DBE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94BB390E1CD9B8E7001A2DBE /* CoreData.framework */; };
+		94BB39101CD9B998001A2DBE /* NSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74AB11CD53F04000F1F4D /* NSManagedObjectContext.swift */; };
+		94BB39111CD9B99B001A2DBE /* NSManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9461A3AF1CD7AA19008EEC3C /* NSManagedObject.swift */; };
+		94BB39121CD9B99F001A2DBE /* CoreDataLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74A9E1CD52EB5000F1F4D /* CoreDataLocalStorage.swift */; };
+		94BB39131CD9B9A5001A2DBE /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74A9A1CD5274B000F1F4D /* Request.swift */; };
+		94BB39141CD9B9A7001A2DBE /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74AA31CD5303E000F1F4D /* FileUtils.swift */; };
+		94BB39151CD9B9AD001A2DBE /* DkErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74AAD1CD53D2D000F1F4D /* DkErrors.swift */; };
+		94BB39161CD9B9B0001A2DBE /* StoreRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74AA61CD53244000F1F4D /* StoreRef.swift */; };
+		94BB39171CD9B9B3001A2DBE /* ModelRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74AA81CD53261000F1F4D /* ModelRef.swift */; };
+		94BB39181CD9B9B5001A2DBE /* OptionRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74AAA1CD538F9000F1F4D /* OptionRef.swift */; };
+		94BB39191CD9B9B8001A2DBE /* ContextRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74AAF1CD53E33000F1F4D /* ContextRef.swift */; };
+		94BB391A1CD9B9BB001A2DBE /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74A941CD524CF000F1F4D /* Storage.swift */; };
+		94BB391B1CD9B9BE001A2DBE /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74A961CD525FC000F1F4D /* Context.swift */; };
+		94BB391C1CD9B9C1001A2DBE /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74A981CD52627000F1F4D /* Entity.swift */; };
 		94F74A701CD51764000F1F4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74A6F1CD51764000F1F4D /* AppDelegate.swift */; };
 		94F74A721CD51764000F1F4D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74A711CD51764000F1F4D /* ViewController.swift */; };
 		94F74A751CD51764000F1F4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94F74A731CD51764000F1F4D /* Main.storyboard */; };
@@ -55,6 +70,10 @@
 		9461A3C01CD7D37D008EEC3C /* FileUtilsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtilsTests.swift; sourceTree = "<group>"; };
 		9461A3C21CD7D632008EEC3C /* RequestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestTests.swift; sourceTree = "<group>"; };
 		9461A3C51CD7DA15008EEC3C /* CoreDataLocalStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataLocalStoreTests.swift; sourceTree = "<group>"; };
+		94BB39061CD9B8AA001A2DBE /* DataKernel-iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "DataKernel-iOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		94BB39081CD9B8AA001A2DBE /* DataKernel-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DataKernel-iOS.h"; sourceTree = "<group>"; };
+		94BB390A1CD9B8AA001A2DBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		94BB390E1CD9B8E7001A2DBE /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		94F74A6C1CD51764000F1F4D /* DataKernel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataKernel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94F74A6F1CD51764000F1F4D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94F74A711CD51764000F1F4D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +100,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		94BB39021CD9B8AA001A2DBE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94BB390F1CD9B8E7001A2DBE /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		94F74A691CD51764000F1F4D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -143,11 +170,22 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		94BB39071CD9B8AA001A2DBE /* DataKernel-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				94BB39081CD9B8AA001A2DBE /* DataKernel-iOS.h */,
+				94BB390A1CD9B8AA001A2DBE /* Info.plist */,
+			);
+			path = "DataKernel-iOS";
+			sourceTree = "<group>";
+		};
 		94F74A631CD51764000F1F4D = {
 			isa = PBXGroup;
 			children = (
+				94BB390E1CD9B8E7001A2DBE /* CoreData.framework */,
 				94F74A6E1CD51764000F1F4D /* DataKernel */,
 				94F74A861CD51765000F1F4D /* DataKernelTests */,
+				94BB39071CD9B8AA001A2DBE /* DataKernel-iOS */,
 				94F74A6D1CD51764000F1F4D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -157,6 +195,7 @@
 			children = (
 				94F74A6C1CD51764000F1F4D /* DataKernel.app */,
 				94F74A831CD51765000F1F4D /* DataKernelTests.xctest */,
+				94BB39061CD9B8AA001A2DBE /* DataKernel-iOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -257,7 +296,37 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		94BB39031CD9B8AA001A2DBE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94BB39091CD9B8AA001A2DBE /* DataKernel-iOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		94BB39051CD9B8AA001A2DBE /* DataKernel-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 94BB390D1CD9B8AA001A2DBE /* Build configuration list for PBXNativeTarget "DataKernel-iOS" */;
+			buildPhases = (
+				94BB39011CD9B8AA001A2DBE /* Sources */,
+				94BB39021CD9B8AA001A2DBE /* Frameworks */,
+				94BB39031CD9B8AA001A2DBE /* Headers */,
+				94BB39041CD9B8AA001A2DBE /* Resources */,
+				94BB391E1CD9BA70001A2DBE /* Bump version */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DataKernel-iOS";
+			productName = "DataKernel-iOS";
+			productReference = 94BB39061CD9B8AA001A2DBE /* DataKernel-iOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		94F74A6B1CD51764000F1F4D /* DataKernel */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 94F74A8C1CD51765000F1F4D /* Build configuration list for PBXNativeTarget "DataKernel" */;
@@ -303,6 +372,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = mrdekk;
 				TargetAttributes = {
+					94BB39051CD9B8AA001A2DBE = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
 					94F74A6B1CD51764000F1F4D = {
 						CreatedOnToolsVersion = 7.2.1;
 					};
@@ -327,11 +399,19 @@
 			targets = (
 				94F74A6B1CD51764000F1F4D /* DataKernel */,
 				94F74A821CD51765000F1F4D /* DataKernelTests */,
+				94BB39051CD9B8AA001A2DBE /* DataKernel-iOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		94BB39041CD9B8AA001A2DBE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		94F74A6A1CD51764000F1F4D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -351,7 +431,44 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		94BB391E1CD9BA70001A2DBE /* Bump version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bump version";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = "/usr/bin/env ruby";
+			shellScript = "git = `sh /etc/profile; which git`.chomp\napp_build = `#{git} rev-list --all | wc -l`.chomp.to_i\n`/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion #{app_build}\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"`\nputs \"Updated #{ENV['TARGET_BUILD_DIR']}/#{ENV['INFOPLIST_PATH']}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		94BB39011CD9B8AA001A2DBE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				94BB39161CD9B9B0001A2DBE /* StoreRef.swift in Sources */,
+				94BB391A1CD9B9BB001A2DBE /* Storage.swift in Sources */,
+				94BB39191CD9B9B8001A2DBE /* ContextRef.swift in Sources */,
+				94BB39101CD9B998001A2DBE /* NSManagedObjectContext.swift in Sources */,
+				94BB39131CD9B9A5001A2DBE /* Request.swift in Sources */,
+				94BB39121CD9B99F001A2DBE /* CoreDataLocalStorage.swift in Sources */,
+				94BB39151CD9B9AD001A2DBE /* DkErrors.swift in Sources */,
+				94BB39111CD9B99B001A2DBE /* NSManagedObject.swift in Sources */,
+				94BB39141CD9B9A7001A2DBE /* FileUtils.swift in Sources */,
+				94BB391B1CD9B9BE001A2DBE /* Context.swift in Sources */,
+				94BB391C1CD9B9C1001A2DBE /* Entity.swift in Sources */,
+				94BB39181CD9B9B5001A2DBE /* OptionRef.swift in Sources */,
+				94BB39171CD9B9B3001A2DBE /* ModelRef.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		94F74A681CD51764000F1F4D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -420,6 +537,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		94BB390B1CD9B8AA001A2DBE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = "DataKernel-iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ru.mrdekk.DataKernel-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		94BB390C1CD9B8AA001A2DBE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = "DataKernel-iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ru.mrdekk.DataKernel-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		94F74A8A1CD51765000F1F4D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -552,6 +713,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		94BB390D1CD9B8AA001A2DBE /* Build configuration list for PBXNativeTarget "DataKernel-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				94BB390B1CD9B8AA001A2DBE /* Debug */,
+				94BB390C1CD9B8AA001A2DBE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		94F74A671CD51764000F1F4D /* Build configuration list for PBXProject "DataKernel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

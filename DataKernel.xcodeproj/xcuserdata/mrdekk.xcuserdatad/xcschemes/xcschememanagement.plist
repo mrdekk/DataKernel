@@ -4,7 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>DataKernel.xcscheme</key>
+		<key>DataKernel-iOS.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>DataKernel.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -12,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>94BB39051CD9B8AA001A2DBE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>94F74A6B1CD51764000F1F4D</key>
 		<dict>
 			<key>primary</key>
