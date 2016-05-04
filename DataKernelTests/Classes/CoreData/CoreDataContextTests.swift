@@ -50,14 +50,13 @@ class CoreDataContextTests: XCTestCase {
     
     func testAcquire() {
         let request: Request<Car> = Request()
-        let request2: Request<Car> = Request().filter("model", equalTo: "CRZ")
         
         let results = try! storage?.uiContext.fetch(request)
         
         XCTAssertEqual(results?.count, 0)
 
         _ = try? storage?.perform(true, unitOfWork: { (context, save) -> Void in
-            let car: Car = try! context.acquire(request2)
+            let car: Car = try! context.acquire("CRZ")
             car.mark = "Honda"
             car.model = "CRZ"
             save()
@@ -72,7 +71,7 @@ class CoreDataContextTests: XCTestCase {
         XCTAssertEqual(firstCar?.model, "CRZ")
         
         _ = try? storage?.perform(true, unitOfWork: { (context, save) -> Void in
-            let car2: Car = try! context.acquire(request2)
+            let car2: Car = try! context.acquire("CRZ")
             car2.mark = "Honda"
             save()
         })

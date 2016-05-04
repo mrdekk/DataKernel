@@ -32,7 +32,9 @@ extension NSManagedObjectContext: Context {
     }
     
     // TODO: may be it will be very usefull to fill the values of created entity with what is supplied to condition, but condition may be oneOf or anything
-    public func acquire<E: Entity>(condition: Request<E>) throws -> E {
+    public func acquire<E: Entity>(value: AnyObject) throws -> E {
+        let pk = try pkKey(E)
+        let condition = Request<E>().filter(pk, equalTo: value)
         let fetched = try fetch(condition)
         if fetched.count > 0 {
             if let entity = fetched.first {
@@ -40,7 +42,12 @@ extension NSManagedObjectContext: Context {
             }
         }
         
-        return try create()
+        let entity: E = try create()
+        if let entity: NSManagedObject = entity as? NSManagedObject {
+            entity.setValue(value, forKey: pk)
+        }
+        
+        return entity
     }
     
     public func remove<E: Entity>(entity: E) throws {
@@ -148,5 +155,29 @@ extension NSManagedObjectContext: Context {
         
         let results = try self.executeFetchRequest(fetchRequest)
         return results.map {$0 as! E}
-   }
+    }
+    
+    func pkKey<E: Entity>(type: E.Type) throws -> String {
+        guard let entityClass = E.self as? NSManagedObject.Type else {
+            throw DkErrors.InvalidEntityClass
+        }
+        
+        let desc: NSEntityDescription? = NSEntityDescription.entityForName(entityClass.entityName, inManagedObjectContext: self)
+        guard let idesc: NSEntityDescription = desc else {
+            throw DkErrors.InvalidEntityClass
+        }
+        
+        if let pk = idesc.userInfo?["pk"] as? String {
+            let pkDesc = idesc.attributesByName[pk]
+            if let ipkDesc: NSAttributeDescription = pkDesc {
+                if ipkDesc.indexed {
+                    return pk
+                }
+            }
+            
+            assert(false, "pk found (\(pk)) but it is not indexed, that will be huge performance problems")
+        }
+        
+        assert(false, "to work with DataKernel entity should have pk info in userInfo")
+    }
 }

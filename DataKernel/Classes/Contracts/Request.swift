@@ -25,12 +25,12 @@ public struct Request<E: Entity> {
     
     // MARK: - Chaining specification methods
     
-    public func filter(key: String, equalTo value: String) -> Request<E> {
-        return self.redef(predicate: NSPredicate(format: "\(key) == %@", value))
+    public func filter(key: String, equalTo value: AnyObject) -> Request<E> {
+        return self.redef(predicate: NSPredicate(format: "\(key) == %@", argumentArray: [value]))
     }
     
-    public func filter(key: String, oneOf value: [String]) -> Request<E> {
-        return self.redef(predicate: NSPredicate(format: "\(key) IN %@", value))
+    public func filter(key: String, oneOf value: [AnyObject]) -> Request<E> {
+        return self.redef(predicate: NSPredicate(format: "\(key) IN %@", argumentArray: [value]))
     }
     
     public func sort(key: String?, ascending: Bool) -> Request<E> {

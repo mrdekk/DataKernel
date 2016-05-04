@@ -46,6 +46,33 @@ public class CoreDataLocalStorage: Storage {
         }
     }
     
+    public func performAsync(ephemeral: Bool, unitOfWork: (context: Context, save: () -> Void) throws -> Void) throws {
+        let context: NSManagedObjectContext = acquireSaveContext(ephemeral) as! NSManagedObjectContext
+        var _error: ErrorType!
+        
+        context.performBlock {
+            do {
+                try unitOfWork(context: context, save: { () -> Void in
+                    do {
+                        try context.save(recursively: true)
+                    } catch {
+                        _error = error
+                    }
+                })
+            } catch {
+                _error = error
+            }
+        }
+        
+        if ephemeral {
+            NSNotificationCenter.defaultCenter().removeObserver(context)
+        }
+        
+        if let error = _error {
+            throw error
+        }
+    }
+    
     public func wipeStore() throws {
         var _error: ErrorType!
         

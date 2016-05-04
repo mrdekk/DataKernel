@@ -12,7 +12,7 @@ public protocol Context {
     func fetch<E: Entity>(request: Request<E>) throws -> [E]
     
     func create<E: Entity>() throws -> E
-    func acquire<E: Entity>(condition: Request<E>) throws -> E // if exist object that satisfies condition or result of create operation
+    func acquire<E: Entity>(value: AnyObject) throws -> E // if exist object that satisfies condition or result of create operation
     
     func remove<E: Entity>(entity: E) throws
     func remove<E: Entity>(entities: [E]) throws
