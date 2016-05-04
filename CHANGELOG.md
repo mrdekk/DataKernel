@@ -1,3 +1,9 @@
+### Version 0.1.3
+**Date:** ???
+**ChangeLog**
+
+- context.wipe for iOS now uses NSBatchDeleteRequest for speedup
+
 ### Version 0.1.2
 **Date:** 4th May 2016 <br />
 **ChangeLog**
