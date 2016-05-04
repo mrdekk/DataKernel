@@ -26,6 +26,17 @@ If you need usage examples - see unit test, it is very straightforward
 
 *Note: You can also test the last commits by specifying it directly in the Podfile line*
 
+### [Carthage](https://carthage)
+1. Install [Carthage](https://github.com/carthage/carthage) on your computer using `brew install carthage`
+3. Edit your `Cartfile` file adding the following line `github "mrdekk/DataKernel"`
+4. Update and build frameworks with `carthage update`
+5. Add generated frameworks to your app main target following the steps [here](https://github.com/carthage/carthage)
+6. Link your target with **CoreData** library *(from Build Phases)*
+
+#### Notes
+- Carthage integration includes both, CoreData and Carthage. We're planning to separate it in multiple frameworks. [Task](https://trello.com/c/hyhN1Tp2/11-create-separated-frameworks-for-foundation-coredata-and-realm)
+- SugarRecord 2.0 is not compatible with the 1.x interface. If you were using that version you'll have to update your project to support this version.
+
 # How to use
 
 TBD, not completed yet, see unit tests
