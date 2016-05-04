@@ -169,6 +169,7 @@ extension NSManagedObjectContext: Context {
 
         guard let pk = idesc.userInfo?["pk"] as? String else {
             assert(false, "to work with DataKernel entity should have pk info in userInfo")
+            throw DkErrors.InvalidEntityClass
         }
         
         let pkDesc = idesc.attributesByName[pk]
