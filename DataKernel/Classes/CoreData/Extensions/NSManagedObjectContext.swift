@@ -75,7 +75,7 @@ extension NSManagedObjectContext: Context {
     }
     
     public func wipe<E: Entity>(type: E.Type) throws {
-        if #available(iOS 9, *) {
+        if #available(iOS 9, OSX 10.11, *) {
             guard let entityClass = E.self as? NSManagedObject.Type else {
                 throw DkErrors.InvalidEntityClass
             }
