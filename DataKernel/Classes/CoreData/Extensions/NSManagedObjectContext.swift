@@ -17,6 +17,11 @@ extension NSManagedObjectContext: Context {
         return try fetchImpl(request, includeProps: true)
     }
     
+    public func count<E: Entity>(request: Request<E>) throws -> Int {
+        let entities = try fetchImpl(request, includeProps: false)
+        return entities.count
+    }
+    
     public func create<E: Entity>() throws -> E {
         guard let entityClass = E.self as? NSManagedObject.Type else {
             throw DkErrors.InvalidEntityClass

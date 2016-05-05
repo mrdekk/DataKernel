@@ -10,6 +10,7 @@ import Foundation
 
 public protocol Context {
     func fetch<E: Entity>(request: Request<E>) throws -> [E]
+    func count<E: Entity>(request: Request<E>) throws -> Int
     
     func create<E: Entity>() throws -> E
     func acquire<E: Entity>(value: AnyObject) throws -> E // if exist object that satisfies condition or result of create operation

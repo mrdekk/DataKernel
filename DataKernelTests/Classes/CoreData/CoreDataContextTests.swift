@@ -48,6 +48,29 @@ class CoreDataContextTests: XCTestCase {
         XCTAssertEqual(firstCar?.model, "CRZ")
     }
     
+    func testCreateAndCount() {
+        _ = try? storage?.perform(true, unitOfWork: { (context, save) -> Void in
+            let car: Car = try! context.create()
+            car.mark = "Honda"
+            car.model = "CRZ"
+            
+            let car2: Car = try! context.create()
+            car2.mark = "Honda"
+            car2.model = "Insight"
+            
+            let car3: Car = try! context.create()
+            car3.mark = "Honda"
+            car3.model = "Integra"
+            
+            save()
+        })
+        
+        let request: Request<Car> = Request().filter("mark", equalTo: "Honda")
+        let count = try! storage?.uiContext.count(request)
+        
+        XCTAssertEqual(count, 3)
+    }
+    
     func testAcquire() {
         let request: Request<Car> = Request()
         

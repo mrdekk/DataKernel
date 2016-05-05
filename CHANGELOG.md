@@ -1,8 +1,9 @@
 ### Version 0.1.3
-**Date:** ???
+**Date:** ??? <br />
 **ChangeLog**
 
 - context.wipe for iOS now uses NSBatchDeleteRequest for speedup
+- context.count added to efficiently count entities without actually fetch them an call entities.count
 
 ### Version 0.1.2
 **Date:** 4th May 2016 <br />
