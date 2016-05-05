@@ -17,6 +17,10 @@ If you need usage examples - see unit test, it is very straightforward
 - Rich set of operations (but I think something may be missed)
 - No iCloud yet (but planned)
 
+## Note
+
+- context.wipe uses NSBatchDeleteRequest on iOS 9 and OSX 10.11, it gives big performance improvements, but can cause problems if you use patterns like wipe all and create new, because it acts directly on persistent store (see Apple WWDC 2015 video or slides)
+
 ## Setup
 
 ### [CocoaPods](https://cocoapods.org)
