@@ -1,0 +1,24 @@
+language: swift
+xcode_sdk: iphonesimulator9.3
+notifications:
+  email: false
+osx_image: xcode7.3
+before_install:
+  - brew bundle
+  - bundle install
+xcode_sdk: iphonesimulator
+install: true
+env:
+  global:
+  - LC_CTYPE=en_US.UTF-8
+  - LANG=en_US.UTF-8
+script:
+  - set -o pipefail
+  - xcodebuild -version
+  - xcodebuild -showsdks
+  - bundle exec fastlane ci
+deploy:
+  provider: script
+  script: bundle exec fastlane deploy
+  on:
+    branch: master
