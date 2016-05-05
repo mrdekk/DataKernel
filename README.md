@@ -1,5 +1,11 @@
 # DataKernel
 
+[![Language: Swift](https://img.shields.io/badge/lang-Swift-orange.svg?style=flat)](https://developer.apple.com/swift/)
+[![Language: Swift](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](http://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.org/mrdekk/DataKernel.svg?branch=master)](https://travis-ci.org/pepibumur/SugarRecord)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![CocoaPods compatible](https://img.shields.io/badge/Cocoa_Pods-compatible-4BC51D.svg?style=flat)](http://cocoapods.org)
+
 ## What is DataKernel?
 
 DataKernel is a minimalistic wrapper around CoreData stack to ease persistence operations. It is havily inspired by [SugarRecord][site-sugarrecord] but have no external dependencies (except cocoa of course) and with some refinements. It is covered with unit tests.
