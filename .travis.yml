@@ -1,2 +1,2 @@
 language: swift
-script: xcodebuild -project DataKernel.xcodeproj -scheme DataKernel-iOS -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+script: xcodebuild -project DataKernel.xcodeproj -scheme DataKernel-iOS -sdk iphonesimulator9.3 ONLY_ACTIVE_ARCH=NO
