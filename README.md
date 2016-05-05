@@ -2,17 +2,19 @@
 
 ## What is DataKernel?
 
-DataKernel is a minimalistic wrapper around CoreData stack to ease persistence operations. It is havily inspired by SugarRecord but have no external dependencies (except cocoa of course) and with some refinements. It is covered with unit tests.
+DataKernel is a minimalistic wrapper around CoreData stack to ease persistence operations. It is havily inspired by [SugarRecord][site-sugarrecord] but have no external dependencies (except cocoa of course) and with some refinements. It is covered with unit tests.
+
+[site-sugarrecord]: https://github.com/pepibumur/SugarRecord
 
 If you have any propositions please file issue.
 If you need usage examples - see unit test, it is very straightforward
 
 ## Features
-- Swift (now tested in xCode 7.2.1, but it should work in 7.3)
+- Swift (tested in xCode 7.2.1, xCode 7.3.0)
 - Protocols based design
 - Fully tested
 - Actively supported
-- No carthage (but you can try and submit PR)
+- Rich set of operations (but I think something may be missed)
 - No iCloud yet (but planned)
 
 ## Setup
@@ -32,10 +34,6 @@ If you need usage examples - see unit test, it is very straightforward
 4. Update and build frameworks with `carthage update`
 5. Add generated frameworks to your app main target following the steps [here](https://github.com/carthage/carthage)
 6. Link your target with **CoreData** library *(from Build Phases)*
-
-#### Notes
-- Carthage integration includes both, CoreData and Carthage. We're planning to separate it in multiple frameworks. [Task](https://trello.com/c/hyhN1Tp2/11-create-separated-frameworks-for-foundation-coredata-and-realm)
-- SugarRecord 2.0 is not compatible with the 1.x interface. If you were using that version you'll have to update your project to support this version.
 
 # How to use
 
