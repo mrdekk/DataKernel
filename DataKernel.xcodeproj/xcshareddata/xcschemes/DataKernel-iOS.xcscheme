@@ -28,7 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "94F74A821CD51765000F1F4D"
+               BuildableName = "DataKernelTests.xctest"
+               BlueprintName = "DataKernelTests"
+               ReferencedContainer = "container:DataKernel.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "94BB39051CD9B8AA001A2DBE"
+            BuildableName = "DataKernel.framework"
+            BlueprintName = "DataKernel-iOS"
+            ReferencedContainer = "container:DataKernel.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
