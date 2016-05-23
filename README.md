@@ -47,7 +47,105 @@ If you need usage examples - see unit test, it is very straightforward
 
 # How to use
 
-TBD, not completed yet, see unit tests
+#### Creating your Storage
+
+A storage is a general wrapper around CoreData PersistentStoreCoordination and PersistentStores. The first step you need to get started is to create `CoreDataLocalStorage`.
+
+```swift
+let store = StoreRef.Named("test1")
+let bundle = NSBundle(forClass: self.classForCoder)
+let model = ModelRef.Merged([bundle])
+let storage = try! CoreDataLocalStorage(store: store!, model: model!, migration: true)
+```
+
+#### Contexts
+
+Storage offer access to uiContext (NSManagedObjectContext on main thread to **GET** data from storage). All modification operations on CoreData entities should be performed with `perform` operation on storage. 
+
+#### Fetching data
+
+```swift
+let cars: [Cars] = try! storage.uiContext.fetch(Request<Car>().filter("mark", equalTo: "Honda"))
+let cars: [Cars] = try! storage.uiContext.fetch(Request<Car>())
+let cars: [Cars] = try! storage.uiContext.fetch(Request<Car>().sort("model", ascending: true))
+
+let predicate = NSPredicate(format: "model == %@", "CRZ")
+let crz: Car? = try! storage.uiContext.fetch(Request<Car>(predicate: predicate)).first
+```
+
+#### Remove/Insert/Update operations
+
+All modification operations should be performed under `perform` operation due to it handles all core data context/threading things internally and you can safely use modification operations under them.
+
+`save` operation perform recursive save with nesting context on core data stack. So, if you change entities that already loaded in uiContext, they will be updated.
+
+Note the first parameter `ephemeral` on `perform` function. If it is true, new context for this operation will be created, and then after save succeeded it will be removed. Creation of contexts in CoreData is rather cheap operations, so don't worry. If you don't need to save data in ephemeral context, just don't call `save`. If you set `ephemeral = false` than precreated special save context will be used for all `ephemeral = false` operations.
+
+```swift
+do {
+  storage.perform(true) { (context, save) throws -> Void in
+    // do you unit of work here
+    save()
+  }
+}
+catch {
+  // There was an error in the operation
+}
+```
+
+##### Creating a model
+
+You can use the `create()` for initializing and inserting in the context in the same operation:
+
+```swift
+do {
+  storage.perform(true) { (context, save) throws -> Void in
+    let newCar: Car = try! context.create()
+    newCar.model = "Honda"
+    newCar.mark = "CRZ"
+    save()
+  }
+}
+catch {
+  // There was an error in the operation
+}
+```
+
+#### Upsert a model 
+
+Upsert - update or insert first search the entity in storage, and then if it is not found creates it. Just call the `acquire` function.
+
+Important: to get this feature work, you should add model property `pk` and set it to name of the field, that is primary key of this entity. Moreover, this property should be indexed. It is needed to achieve needed level of performance.
+
+```swift
+do {
+  storage.perform(true) { (context, save) throws -> Void in
+    let car: Car = try! context.acquire("CRZ")
+  }
+}
+catch {
+  // There was an error in the operation
+}
+```
+
+##### Delete a model
+
+In a similar way you can use the `remove()` method from the context passing the objects you want to remove from the database:
+
+```swift
+do {
+  storage.perform(true) { (context, save) throws -> Void in
+    let car: Car? = try! context.fetch(Request<Car>.filter("model", equalTo: "CRZ")).first
+    if let car = car {
+      try! context.remove([car])
+      save()
+    }
+  }
+}
+catch {
+  // There was an error in the operation
+}
+```
 
 # Contributing
 
