@@ -2,7 +2,7 @@
 
 [![Language: Swift](https://img.shields.io/badge/lang-Swift-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![Language: Swift](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](http://opensource.org/licenses/MIT)
-[![Build Status](https://travis-ci.org/mrdekk/DataKernel.svg?branch=master)](https://travis-ci.org/pepibumur/SugarRecord)
+[![Build Status](https://travis-ci.org/mrdekk/DataKernel.svg?branch=master)](https://travis-ci.org/mrdekk/DataKernel)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods compatible](https://img.shields.io/badge/Cocoa_Pods-compatible-4BC51D.svg?style=flat)](http://cocoapods.org)
 
