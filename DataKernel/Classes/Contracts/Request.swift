@@ -33,6 +33,15 @@ public struct Request<E: Entity> {
         return self.redef(predicate: NSPredicate(format: "\(key) IN %@", argumentArray: [value]))
     }
     
+    public func filter(keys: [String], equalsTo value: [AnyObject]) -> Request<E> {
+        var clauses = [String]()
+        for key in keys {
+            clauses.append("\(key) == %@")
+        }
+        
+        return self.redef(predicate: NSPredicate(format: clauses.joinWithSeparator(" AND "), argumentArray: value))
+    }
+    
     public func sort(key: String?, ascending: Bool) -> Request<E> {
         return self.redef(sort: NSSortDescriptor(key: key, ascending: ascending))
     }

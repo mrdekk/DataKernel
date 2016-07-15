@@ -12,4 +12,5 @@ public enum DkErrors: ErrorType {
     case PersistentStoreInitilization // some errors during initialization of Core Data stack
     case RecursiveSaveFailed // some errors in recursive save of dependent NSManagedObjectContexts
     case InvalidEntityClass // class supplied to NSManagaedObjectContext as Context methods
+    case InvalidArgument(String) // supplied argument is invalid due to configuration
 }

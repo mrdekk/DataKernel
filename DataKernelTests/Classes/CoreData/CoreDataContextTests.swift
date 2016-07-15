@@ -108,6 +108,43 @@ class CoreDataContextTests: XCTestCase {
         XCTAssertEqual(firstCar2?.model, "CRZ")
     }
     
+    func testAcquireCompoundKey() {
+        let request: Request<CarRent> = Request()
+        
+        let results = try! storage?.uiContext.fetch(request)
+        
+        XCTAssertEqual(results?.count, 0)
+        
+        _ = try? storage?.perform(true, unitOfWork: { (context, save) in
+            let rent: CarRent = try! context.acquire(["CRZ", "mrdekk"])
+            rent.model = "CRZ"
+            rent.rentee = "mrdekk"
+            save()
+        })
+        
+        let results2 = try! storage?.uiContext.fetch(request)
+        let firstRent = results2?.first
+        
+        XCTAssertEqual(results2?.count, 1)
+        XCTAssertNotNil(firstRent)
+        XCTAssertEqual(firstRent?.model, "CRZ")
+        XCTAssertEqual(firstRent?.rentee, "mrdekk")
+        
+        _ = try? storage?.perform(true, unitOfWork: { (context, save) in
+            let rent2: CarRent = try! context.acquire(["CRZ", "mrdekk"])
+            rent2.model = "CRZ"
+            save()
+        })
+        
+        let results3 = try! storage?.uiContext.fetch(request)
+        let firstRent2 = results3?.first
+        
+        XCTAssertEqual(results3?.count, 1)
+        XCTAssertNotNil(firstRent2)
+        XCTAssertEqual(firstRent2?.model, "CRZ")
+        XCTAssertEqual(firstRent2?.rentee, "mrdekk")
+    }
+    
     func testRemoveOne() {
         _ = try? storage?.perform(true, unitOfWork: { (context, save) -> Void in
             let car: Car = try! context.create()
