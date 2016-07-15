@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9434B0671D38CB900078454D /* CarRent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9434B0661D38CB900078454D /* CarRent.swift */; };
+		9434B0691D38CBAE0078454D /* CarRent+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9434B0681D38CBAE0078454D /* CarRent+CoreDataProperties.swift */; };
 		945D44A71CD9012E00A47743 /* CoreDataContextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945D44A61CD9012E00A47743 /* CoreDataContextTests.swift */; };
 		9461A3B01CD7AA19008EEC3C /* NSManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9461A3AF1CD7AA19008EEC3C /* NSManagedObject.swift */; };
 		9461A3B41CD7D1A0008EEC3C /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9461A3B21CD7D1A0008EEC3C /* DataModel.xcdatamodeld */; };
@@ -62,6 +64,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9434B0661D38CB900078454D /* CarRent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarRent.swift; sourceTree = "<group>"; };
+		9434B0681D38CBAE0078454D /* CarRent+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CarRent+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		945D44A61CD9012E00A47743 /* CoreDataContextTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataContextTests.swift; sourceTree = "<group>"; };
 		9461A3AF1CD7AA19008EEC3C /* NSManagedObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSManagedObject.swift; sourceTree = "<group>"; };
 		9461A3B31CD7D1A0008EEC3C /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -146,8 +150,10 @@
 		9461A3BA1CD7D2DA008EEC3C /* Managed */ = {
 			isa = PBXGroup;
 			children = (
-				9461A3BB1CD7D2DA008EEC3C /* Car+CoreDataProperties.swift */,
 				9461A3BC1CD7D2DA008EEC3C /* Car.swift */,
+				9461A3BB1CD7D2DA008EEC3C /* Car+CoreDataProperties.swift */,
+				9434B0661D38CB900078454D /* CarRent.swift */,
+				9434B0681D38CBAE0078454D /* CarRent+CoreDataProperties.swift */,
 			);
 			path = Managed;
 			sourceTree = "<group>";
@@ -499,6 +505,8 @@
 				945D44A71CD9012E00A47743 /* CoreDataContextTests.swift in Sources */,
 				94F74A881CD51765000F1F4D /* DataKernelTests.swift in Sources */,
 				9461A3C11CD7D37D008EEC3C /* FileUtilsTests.swift in Sources */,
+				9434B0671D38CB900078454D /* CarRent.swift in Sources */,
+				9434B0691D38CBAE0078454D /* CarRent+CoreDataProperties.swift in Sources */,
 				9461A3BD1CD7D2DA008EEC3C /* Car+CoreDataProperties.swift in Sources */,
 				9461A3C31CD7D632008EEC3C /* RequestTests.swift in Sources */,
 				9461A3BE1CD7D2DA008EEC3C /* Car.swift in Sources */,

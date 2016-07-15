@@ -39,17 +39,44 @@ extension NSManagedObjectContext: Context {
     // TODO: may be it will be very usefull to fill the values of created entity with what is supplied to condition, but condition may be oneOf or anything
     public func acquire<E: Entity>(value: AnyObject) throws -> E {
         let pk = try pkKey(E)
-        let condition = Request<E>().filter(pk, equalTo: value)
-        let fetched = try fetch(condition)
-        if fetched.count > 0 {
-            if let entity = fetched.first {
-                return entity
+        
+        var fetched: [E]? = nil
+
+        if pk.count == 1 {
+            let condition = Request<E>().filter(pk[0], equalTo: value)
+            fetched = try fetch(condition)
+        } else if pk.count > 1 {
+            if let value = value as? [AnyObject] {
+                let condition = Request<E>().filter(pk, equalsTo: value)
+                fetched = try fetch(condition)
+            }
+        }
+
+        if let fetched = fetched {
+            if fetched.count > 0 {
+                if let entity = fetched.first {
+                    return entity
+                }
             }
         }
         
         let entity: E = try create()
         if let entity: NSManagedObject = entity as? NSManagedObject {
-            entity.setValue(value, forKey: pk)
+            if pk.count == 1 {
+                entity.setValue(value, forKey: pk[0])
+            } else if pk.count > 1 {
+                if let value = value as? [AnyObject] {
+                    if pk.count == value.count {
+                        for (i, ipk) in pk.enumerate() {
+                            entity.setValue(value[i], forKey: ipk)
+                        }
+                    } else {
+                        throw DkErrors.InvalidArgument("value")
+                    }
+                } else {
+                    throw DkErrors.InvalidArgument("value")
+                }
+            }
         }
         
         return entity
@@ -171,7 +198,7 @@ extension NSManagedObjectContext: Context {
         return results.map {$0 as! E}
     }
     
-    func pkKey<E: Entity>(type: E.Type) throws -> String {
+    func pkKey<E: Entity>(type: E.Type) throws -> [String] {
         guard let entityClass = E.self as? NSManagedObject.Type else {
             throw DkErrors.InvalidEntityClass
         }
@@ -180,21 +207,35 @@ extension NSManagedObjectContext: Context {
         guard let idesc: NSEntityDescription = desc else {
             throw DkErrors.InvalidEntityClass
         }
-
-        guard let pk = idesc.userInfo?["pk"] as? String else {
-            assert(false, "to work with DataKernel entity should have pk info in userInfo")
-            throw DkErrors.InvalidEntityClass
+        
+        if let pk = idesc.userInfo?["pk"] as? String {
+            let pkDesc = idesc.attributesByName[pk]
+            if let ipkDesc: NSAttributeDescription = pkDesc {
+                if !ipkDesc.indexed {
+                    assert(false, "pk found (\(pk)) but it is not indexed, that will be huge performance problems")
+                }
+                
+                return [pk]
+            }
         }
         
-        let pkDesc = idesc.attributesByName[pk]
-        guard let ipkDesc: NSAttributeDescription = pkDesc else {
-            throw DkErrors.InvalidEntityClass
+        if let pkss = idesc.userInfo?["pks"] as? String {
+            let pks = pkss.componentsSeparatedByString(",")
+            var descs = [NSAttributeDescription]()
+            for pk in pks {
+                let pkDesc = idesc.attributesByName[pk]
+                if let ipkDesc: NSAttributeDescription = pkDesc {
+                    if !ipkDesc.indexed {
+                        assert(false, "one part of pk (\(pkss)) - (\(pk)) found, but it is not indexed, that will be huge performace problems")
+                    }
+                    descs.append(ipkDesc)
+                }
+            }
+            if pks.count == descs.count {
+                return pks
+            }
         }
-
-        if !ipkDesc.indexed {
-            assert(false, "pk found (\(pk)) but it is not indexed, that will be huge performance problems")
-        }
-
-        return pk
+        
+        throw DkErrors.InvalidEntityClass
     }
 }

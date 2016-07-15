@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
     <entity name="Car" representedClassName=".Car" syncable="YES">
         <attribute name="mark" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="model" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
@@ -7,7 +7,19 @@
             <entry key="pk" value="model"/>
         </userInfo>
     </entity>
+    <entity name="CarRent" representedClassName=".CarRent" syncable="YES">
+        <attribute name="model" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="rentee" optional="YES" attributeType="String" indexed="YES" syncable="YES">
+            <userInfo>
+                <entry key="pks" value="model,rentee"/>
+            </userInfo>
+        </attribute>
+        <userInfo>
+            <entry key="pks" value="model,rentee"/>
+        </userInfo>
+    </entity>
     <elements>
         <element name="Car" positionX="-3834" positionY="-2844" width="128" height="75"/>
+        <element name="CarRent" positionX="-3834" positionY="-2826" width="128" height="75"/>
     </elements>
 </model>
