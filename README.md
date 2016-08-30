@@ -8,7 +8,7 @@
 
 ## What is DataKernel?
 
-DataKernel is a minimalistic wrapper around CoreData stack to ease persistence operations. It is havily inspired by [SugarRecord][site-sugarrecord] but have no external dependencies (except cocoa of course) and with some refinements. It is covered with unit tests.
+DataKernel is a minimalistic wrapper around CoreData stack to ease persistence operations. It is heavily inspired by [SugarRecord][site-sugarrecord] but have no external dependencies (except Cocoa of course) and with some refinements. It is covered with unit tests.
 
 [site-sugarrecord]: https://github.com/pepibumur/SugarRecord
 
@@ -79,7 +79,7 @@ All modification operations should be performed under `perform` operation due to
 
 `save` operation perform recursive save with nesting context on core data stack. So, if you change entities that already loaded in uiContext, they will be updated.
 
-Note the first parameter `ephemeral` on `perform` function. If it is true, new context for this operation will be created, and then after save succeeded it will be removed. Creation of contexts in CoreData is rather cheap operations, so don't worry. If you don't need to save data in ephemeral context, just don't call `save`. If you set `ephemeral = false` than precreated special save context will be used for all `ephemeral = false` operations.
+Note the first parameter `ephemeral` on `perform` function. If it is true, new context for this operation will be created, and then after save succeeded it will be removed. Creation of contexts in CoreData is rather cheap operations, so don't worry. If you don't need to save data in ephemeral context, just don't call `save`. If you set `ephemeral = false` then a pre-created special save context will be used for all `ephemeral = false` operations.
 
 ```swift
 do {
