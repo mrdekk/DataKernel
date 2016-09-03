@@ -20,7 +20,7 @@
 		94BB39101CD9B998001A2DBE /* NSManagedObjectContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74AB11CD53F04000F1F4D /* NSManagedObjectContext.swift */; };
 		94BB39111CD9B99B001A2DBE /* NSManagedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9461A3AF1CD7AA19008EEC3C /* NSManagedObject.swift */; };
 		94BB39121CD9B99F001A2DBE /* CoreDataLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74A9E1CD52EB5000F1F4D /* CoreDataLocalStorage.swift */; };
-		94BB39131CD9B9A5001A2DBE /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74A9A1CD5274B000F1F4D /* Request.swift */; };
+		94BB39131CD9B9A5001A2DBE /* DataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74A9A1CD5274B000F1F4D /* DataRequest.swift */; };
 		94BB39141CD9B9A7001A2DBE /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74AA31CD5303E000F1F4D /* FileUtils.swift */; };
 		94BB39151CD9B9AD001A2DBE /* DkErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74AAD1CD53D2D000F1F4D /* DkErrors.swift */; };
 		94BB39161CD9B9B0001A2DBE /* StoreRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74AA61CD53244000F1F4D /* StoreRef.swift */; };
@@ -40,7 +40,7 @@
 		94F74A951CD524CF000F1F4D /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74A941CD524CF000F1F4D /* Storage.swift */; };
 		94F74A971CD525FC000F1F4D /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74A961CD525FC000F1F4D /* Context.swift */; };
 		94F74A991CD52627000F1F4D /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74A981CD52627000F1F4D /* Entity.swift */; };
-		94F74A9B1CD5274B000F1F4D /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74A9A1CD5274B000F1F4D /* Request.swift */; };
+		94F74A9B1CD5274B000F1F4D /* DataRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74A9A1CD5274B000F1F4D /* DataRequest.swift */; };
 		94F74A9F1CD52EB5000F1F4D /* CoreDataLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74A9E1CD52EB5000F1F4D /* CoreDataLocalStorage.swift */; };
 		94F74AA41CD5303E000F1F4D /* FileUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74AA31CD5303E000F1F4D /* FileUtils.swift */; };
 		94F74AA71CD53244000F1F4D /* StoreRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F74AA61CD53244000F1F4D /* StoreRef.swift */; };
@@ -88,7 +88,7 @@
 		94F74A941CD524CF000F1F4D /* Storage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		94F74A961CD525FC000F1F4D /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
 		94F74A981CD52627000F1F4D /* Entity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
-		94F74A9A1CD5274B000F1F4D /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Request.swift; path = ../Contracts/Request.swift; sourceTree = "<group>"; };
+		94F74A9A1CD5274B000F1F4D /* DataRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataRequest.swift; path = ../Contracts/DataRequest.swift; sourceTree = "<group>"; };
 		94F74A9E1CD52EB5000F1F4D /* CoreDataLocalStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataLocalStorage.swift; sourceTree = "<group>"; };
 		94F74AA31CD5303E000F1F4D /* FileUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtils.swift; sourceTree = "<group>"; };
 		94F74AA61CD53244000F1F4D /* StoreRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreRef.swift; sourceTree = "<group>"; };
@@ -251,7 +251,7 @@
 		94F74A9C1CD529C5000F1F4D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				94F74A9A1CD5274B000F1F4D /* Request.swift */,
+				94F74A9A1CD5274B000F1F4D /* DataRequest.swift */,
 				94F74AA31CD5303E000F1F4D /* FileUtils.swift */,
 			);
 			path = Helpers;
@@ -457,7 +457,7 @@
 				94BB391A1CD9B9BB001A2DBE /* Storage.swift in Sources */,
 				94BB39191CD9B9B8001A2DBE /* ContextRef.swift in Sources */,
 				94BB39101CD9B998001A2DBE /* NSManagedObjectContext.swift in Sources */,
-				94BB39131CD9B9A5001A2DBE /* Request.swift in Sources */,
+				94BB39131CD9B9A5001A2DBE /* DataRequest.swift in Sources */,
 				94BB39121CD9B99F001A2DBE /* CoreDataLocalStorage.swift in Sources */,
 				94BB39151CD9B9AD001A2DBE /* DkErrors.swift in Sources */,
 				94BB39111CD9B99B001A2DBE /* NSManagedObject.swift in Sources */,
@@ -485,7 +485,7 @@
 				94F74A991CD52627000F1F4D /* Entity.swift in Sources */,
 				94F74A721CD51764000F1F4D /* ViewController.swift in Sources */,
 				94F74AB01CD53E33000F1F4D /* ContextRef.swift in Sources */,
-				94F74A9B1CD5274B000F1F4D /* Request.swift in Sources */,
+				94F74A9B1CD5274B000F1F4D /* DataRequest.swift in Sources */,
 				94F74A971CD525FC000F1F4D /* Context.swift in Sources */,
 				94F74A701CD51764000F1F4D /* AppDelegate.swift in Sources */,
 				94F74AA41CD5303E000F1F4D /* FileUtils.swift in Sources */,

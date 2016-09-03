@@ -13,11 +13,11 @@ extension NSManagedObjectContext: Context {
     
     // MARK: - Context
     
-    public func fetch<E: Entity>(request: Request<E>) throws -> [E] {
+    public func fetch<E: Entity>(request: DataRequest<E>) throws -> [E] {
         return try fetchImpl(request, includeProps: true)
     }
     
-    public func count<E: Entity>(request: Request<E>) throws -> Int {
+    public func count<E: Entity>(request: DataRequest<E>) throws -> Int {
         let entities = try fetchImpl(request, includeProps: false)
         return entities.count
     }
@@ -39,7 +39,7 @@ extension NSManagedObjectContext: Context {
     // TODO: may be it will be very usefull to fill the values of created entity with what is supplied to condition, but condition may be oneOf or anything
     public func acquire<E: Entity>(value: AnyObject) throws -> E {
         let pk = try pkKey(E)
-        let condition = Request<E>().filter(pk, equalTo: value)
+        let condition = DataRequest<E>().filter(pk, equalTo: value)
         let fetched = try fetch(condition)
         if fetched.count > 0 {
             if let entity = fetched.first {
@@ -69,7 +69,7 @@ extension NSManagedObjectContext: Context {
         }
     }
     
-    public func remove<E: Entity>(condition: Request<E>) throws {
+    public func remove<E: Entity>(condition: DataRequest<E>) throws {
         let entities = try fetchImpl(condition, includeProps: false)
         try remove(entities)
     }
@@ -83,7 +83,7 @@ extension NSManagedObjectContext: Context {
             let requestDelete = NSBatchDeleteRequest(fetchRequest: request)
             try executeRequest(requestDelete)
         } else {
-            let request = Request<E>(sort: nil, predicate: nil)
+            let request = DataRequest<E>(sort: nil, predicate: nil)
             let entities = try fetchImpl(request, includeProps: false)
             try remove(entities)
         }
@@ -141,7 +141,7 @@ extension NSManagedObjectContext: Context {
         }
     }
     
-    func buildNSFetchRequest<E: Entity>(request: Request<E>) throws -> NSFetchRequest {
+    func buildNSFetchRequest<E: Entity>(request: DataRequest<E>) throws -> NSFetchRequest {
         guard let entityClass = E.self as? NSManagedObject.Type else {
             throw DkErrors.InvalidEntityClass
         }
@@ -163,7 +163,7 @@ extension NSManagedObjectContext: Context {
         return request
     }
     
-    func fetchImpl<E: Entity>(request: Request<E>, includeProps: Bool = true) throws -> [E] {
+    func fetchImpl<E: Entity>(request: DataRequest<E>, includeProps: Bool = true) throws -> [E] {
         let fetchRequest = try buildNSFetchRequest(request)
         fetchRequest.includesPropertyValues = includeProps
         

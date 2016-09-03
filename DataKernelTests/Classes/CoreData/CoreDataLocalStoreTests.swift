@@ -69,7 +69,7 @@ class CoreDataLocalStoreTests: XCTestCase {
             let _: Car = try! context.create()
             save()
         })
-        let request: Request<Car> = Request()
+        let request: DataRequest<Car> = DataRequest()
         let carsCount: Int? = try! storage?.uiContext.fetch(request).count
         
         XCTAssertEqual(carsCount, 1)
