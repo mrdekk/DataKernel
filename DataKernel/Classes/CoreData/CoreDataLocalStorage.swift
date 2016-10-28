@@ -195,7 +195,7 @@ public class CoreDataLocalStorage: Storage {
     }
     
     private func cleanStoreOnFailedMigration(store: StoreRef) throws {
-        let rawUrl: String = store.location().absoluteString!
+        guard let rawUrl: String = store.location().absoluteString else { return }
         let shmSidecar: NSURL = NSURL(string: rawUrl.stringByAppendingString("-shm"))!
         let walSidecar: NSURL = NSURL(string: rawUrl.stringByAppendingString("-wal"))!
         try NSFileManager.defaultManager().removeItemAtURL(store.location())

@@ -15,7 +15,7 @@ public enum StoreRef: Equatable {
     public func location() -> NSURL {
         switch self {
         case .URL(let url): return url
-        case .Named(let name): return NSURL(fileURLWithPath: FileUtils.documents()).URLByAppendingPathComponent(name)!
+        case .Named(let name): return NSURL(fileURLWithPath: FileUtils.documents()).URLByAppendingPathComponent(name)! // TODO: deal with force unwrap to be defensive
         }
     }    
 }
