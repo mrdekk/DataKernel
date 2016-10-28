@@ -1,3 +1,9 @@
+### Version 0.2.0
+**Date:** 27 Oct 2016 <br />
+**ChangeLog**
+
+- Swift 2.3 support
+
 ### Version 0.1.3
 **Date:** 5th May 2016 <br />
 **ChangeLog**

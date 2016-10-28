@@ -16,7 +16,7 @@ If you have any propositions please file issue.
 If you need usage examples - see unit test, it is very straightforward
 
 ## Features
-- Swift (tested in xCode 7.2.1, xCode 7.3.0)
+- Swift (tested in xCode 7.2.1, xCode 7.3.0, xCode 7.3.1 for master branch, xCode 8) 
 - Protocols based design
 - Fully tested
 - Actively supported
