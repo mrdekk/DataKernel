@@ -19,9 +19,9 @@ class CoreDataLocalStoreTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        store = .Named("test1")
-        let bundle = NSBundle(forClass: self.classForCoder)
-        model = .Merged([bundle])
+        store = .named("test1")
+        let bundle = Bundle(for: self.classForCoder)
+        model = .merged([bundle])
         self.storage = try! CoreDataLocalStorage(store: store!, model: model!, migration: true)
     }
     
@@ -32,14 +32,14 @@ class CoreDataLocalStoreTests: XCTestCase {
     }
     
     func testStoreCreation() {
-        let path = store!.location().path!
+        let path = store!.location().path
         
-        XCTAssertTrue(NSFileManager.defaultManager().fileExistsAtPath(path))
+        XCTAssertTrue(FileManager.default.fileExists(atPath: path))
     }
     
     func testRootContext() {
         XCTAssertEqual(storage?.rootContext.persistentStoreCoordinator, storage?.persistentStoreCoordinator)
-        XCTAssertEqual(storage?.rootContext.concurrencyType, .PrivateQueueConcurrencyType)
+        XCTAssertEqual(storage?.rootContext.concurrencyType, .privateQueueConcurrencyType)
     }
 
     func testSaveContext() {
@@ -48,20 +48,20 @@ class CoreDataLocalStoreTests: XCTestCase {
             saveContext = context
         })
         
-        XCTAssertEqual((saveContext as! NSManagedObjectContext).parentContext, storage?.rootContext)
-        XCTAssertEqual((saveContext as! NSManagedObjectContext).concurrencyType, NSManagedObjectContextConcurrencyType.PrivateQueueConcurrencyType)
+        XCTAssertEqual((saveContext as! NSManagedObjectContext).parent, storage?.rootContext)
+        XCTAssertEqual((saveContext as! NSManagedObjectContext).concurrencyType, NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
     }
     
     func testUIContext() {
-        XCTAssertEqual((storage?.uiContext as! NSManagedObjectContext).parentContext, storage?.rootContext)
-        XCTAssertEqual((storage?.uiContext as! NSManagedObjectContext).concurrencyType, NSManagedObjectContextConcurrencyType.MainQueueConcurrencyType)
+        XCTAssertEqual((storage?.uiContext as! NSManagedObjectContext).parent, storage?.rootContext)
+        XCTAssertEqual((storage?.uiContext as! NSManagedObjectContext).concurrencyType, NSManagedObjectContextConcurrencyType.mainQueueConcurrencyType)
     }
     
     func testStoreRemoval() {
         _ = try? storage?.wipeStore()
-        let path = store!.location().path!
+        let path = store!.location().path
         
-        XCTAssertFalse(NSFileManager.defaultManager().fileExistsAtPath(path))
+        XCTAssertFalse(FileManager.default.fileExists(atPath: path))
     }
 
     func testSave() {

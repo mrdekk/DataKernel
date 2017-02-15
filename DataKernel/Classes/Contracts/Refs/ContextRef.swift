@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 public enum ContextRef {
-    case Coordinator(NSPersistentStoreCoordinator)
-    case Context(NSManagedObjectContext)
+    case coordinator(NSPersistentStoreCoordinator)
+    case context(NSManagedObjectContext)
 }

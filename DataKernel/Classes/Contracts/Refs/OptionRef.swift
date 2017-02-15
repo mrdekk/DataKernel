@@ -10,25 +10,25 @@ import Foundation
 import CoreData
 
 public enum OptionRef {
-    case Default
-    case Migration
+    case `default`
+    case migration
     
-    func build() -> [NSObject: AnyObject] {
+    func build() -> [AnyHashable: Any] {
         switch self {
-        case .Default:
+        case .default:
             var sqliteOptions: [String: String] = [String: String] ()
             sqliteOptions["WAL"] = "journal_mode"
-            var options: [NSObject: AnyObject] = [NSObject: AnyObject] ()
-            options[NSMigratePersistentStoresAutomaticallyOption] = NSNumber(bool: true)
-            options[NSInferMappingModelAutomaticallyOption] = NSNumber(bool: false)
+            var options: [AnyHashable: Any] = [AnyHashable: Any] ()
+            options[NSMigratePersistentStoresAutomaticallyOption] = NSNumber(value: true as Bool)
+            options[NSInferMappingModelAutomaticallyOption] = NSNumber(value: false as Bool)
             options[NSSQLitePragmasOption] = sqliteOptions
             return options
-        case .Migration:
+        case .migration:
             var sqliteOptions: [String: String] = [String: String] ()
             sqliteOptions["WAL"] = "journal_mode"
-            var options: [NSObject: AnyObject] = [NSObject: AnyObject] ()
-            options[NSMigratePersistentStoresAutomaticallyOption] = NSNumber(bool: true)
-            options[NSInferMappingModelAutomaticallyOption] = NSNumber(bool: true)
+            var options: [AnyHashable: Any] = [AnyHashable: Any] ()
+            options[NSMigratePersistentStoresAutomaticallyOption] = NSNumber(value: true as Bool)
+            options[NSInferMappingModelAutomaticallyOption] = NSNumber(value: true as Bool)
             options[NSSQLitePragmasOption] = sqliteOptions
             return options
         }

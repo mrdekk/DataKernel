@@ -9,13 +9,13 @@
 import Foundation
 
 public enum StoreRef: Equatable {
-    case Named(String)
-    case URL(NSURL)
+    case named(String)
+    case url(URL)
     
-    public func location() -> NSURL {
+    public func location() -> URL {
         switch self {
-        case .URL(let url): return url
-        case .Named(let name): return NSURL(fileURLWithPath: FileUtils.documents()).URLByAppendingPathComponent(name)
+        case .url(let url): return url
+        case .named(let name): return Foundation.URL(fileURLWithPath: FileUtils.documents()).appendingPathComponent(name)
         }
     }    
 }

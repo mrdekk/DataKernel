@@ -12,7 +12,7 @@ import CoreData
 extension NSManagedObject: Entity {
     
     public class var entityName: String {
-        return NSStringFromClass(self).componentsSeparatedByString(".").last!
+        return NSStringFromClass(self).components(separatedBy: ".").last!
     }
     
 }

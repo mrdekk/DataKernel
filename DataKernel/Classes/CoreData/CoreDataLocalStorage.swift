@@ -9,22 +9,22 @@
 import Foundation
 import CoreData
 
-public class CoreDataLocalStorage: Storage {
+open class CoreDataLocalStorage: Storage {
     
     // MARK: - Storage
     
     internal let store: StoreRef
     internal let migration: Bool
     
-    public var uiContext: Context!
+    open var uiContext: Context!
     
-    public func perform(ephemeral: Bool, unitOfWork: (context: Context, save: () -> Void) throws -> Void) throws {
+    open func perform(_ ephemeral: Bool, unitOfWork: @escaping (_ context: Context, _ save: () -> Void) throws -> Void) throws {
         let context: NSManagedObjectContext = acquireSaveContext(ephemeral) as! NSManagedObjectContext
-        var _error: ErrorType!
+        var _error: Error!
         
-        context.performBlockAndWait {
+        context.performAndWait {
             do {
-                try unitOfWork(context: context, save: { () -> Void  in
+                try unitOfWork(context, { () -> Void  in
                     do {
                         try context.save(recursively: true)
                     }
@@ -38,7 +38,7 @@ public class CoreDataLocalStorage: Storage {
         }
         
         if ephemeral {
-            NSNotificationCenter.defaultCenter().removeObserver(context)
+            NotificationCenter.default.removeObserver(context)
         }
         
         if let error = _error {
@@ -46,13 +46,13 @@ public class CoreDataLocalStorage: Storage {
         }
     }
     
-    public func performAsync(ephemeral: Bool, unitOfWork: (context: Context, save: () -> Void) throws -> Void) throws {
+    open func performAsync(_ ephemeral: Bool, unitOfWork: @escaping (_ context: Context, _ save: () -> Void) throws -> Void) throws {
         let context: NSManagedObjectContext = acquireSaveContext(ephemeral) as! NSManagedObjectContext
-        var _error: ErrorType!
+        var _error: Error!
         
-        context.performBlock {
+        context.perform {
             do {
-                try unitOfWork(context: context, save: { () -> Void in
+                try unitOfWork(context, { () -> Void in
                     do {
                         try context.save(recursively: true)
                     } catch {
@@ -65,7 +65,7 @@ public class CoreDataLocalStorage: Storage {
         }
         
         if ephemeral {
-            NSNotificationCenter.defaultCenter().removeObserver(context)
+            NotificationCenter.default.removeObserver(context)
         }
         
         if let error = _error {
@@ -73,12 +73,12 @@ public class CoreDataLocalStorage: Storage {
         }
     }
     
-    public func wipeStore() throws {
-        var _error: ErrorType!
+    open func wipeStore() throws {
+        var _error: Error!
         
-        persistentStoreCoordinator.performBlockAndWait({
+        persistentStoreCoordinator.performAndWait({
             do {
-                try self.persistentStoreCoordinator.removePersistentStore(self.persistentStore)
+                try self.persistentStoreCoordinator.remove(self.persistentStore)
             } catch {
                 _error = error
             }
@@ -88,10 +88,10 @@ public class CoreDataLocalStorage: Storage {
             throw error
         }
         
-        try NSFileManager.defaultManager().removeItemAtURL(store.location())
+        try FileManager.default.removeItem(at: store.location() as URL)
     }
     
-    public func restoreStore() throws {        
+    open func restoreStore() throws {        
         self.persistentStore = try initializeStore(store, coordinator: self.persistentStoreCoordinator, migrate: self.migration)
     }
     
@@ -111,15 +111,15 @@ public class CoreDataLocalStorage: Storage {
         self.model = model.build()!
         self.persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.model)
         self.persistentStore = try initializeStore(store, coordinator: self.persistentStoreCoordinator, migrate: migration)
-        self.rootContext = initializeContext(.Coordinator(self.persistentStoreCoordinator), concurrency: .PrivateQueueConcurrencyType)
-        self.uiContext = initializeContext(.Context(self.rootContext), concurrency: .MainQueueConcurrencyType)
+        self.rootContext = initializeContext(.coordinator(self.persistentStoreCoordinator), concurrency: .privateQueueConcurrencyType)
+        self.uiContext = initializeContext(.context(self.rootContext), concurrency: .mainQueueConcurrencyType)
     }
     
     // MARK: - Private
     
     internal var saveContext: Context!
     
-    private func acquireSaveContext(ephemeral: Bool) -> Context! {
+    fileprivate func acquireSaveContext(_ ephemeral: Bool) -> Context! {
         if ephemeral {
             return initializeSaveContext()
         } else {
@@ -132,21 +132,21 @@ public class CoreDataLocalStorage: Storage {
         }
     }
     
-    private func initializeSaveContext() -> Context! {
-        let context = initializeContext(.Context(self.rootContext), concurrency: .PrivateQueueConcurrencyType)
+    fileprivate func initializeSaveContext() -> Context! {
+        let context = initializeContext(.context(self.rootContext), concurrency: .privateQueueConcurrencyType)
         context.observeDidSaveNotification(true) { [weak self] (notification) -> Void in
-            (self?.uiContext as? NSManagedObjectContext)?.mergeChangesFromContextDidSaveNotification(notification)
+            (self?.uiContext as? NSManagedObjectContext)?.mergeChanges(fromContextDidSave: notification)
         }
         return context
     }
     
-    private func initializeContext(parent: ContextRef?, concurrency: NSManagedObjectContextConcurrencyType) -> NSManagedObjectContext {
+    fileprivate func initializeContext(_ parent: ContextRef?, concurrency: NSManagedObjectContextConcurrencyType) -> NSManagedObjectContext {
         let context = NSManagedObjectContext(concurrencyType: concurrency)
 
         if let parent = parent {
             switch parent {
-            case .Context(let parentContext): context.parentContext = parentContext
-            case .Coordinator(let storeCoordinator): context.persistentStoreCoordinator = storeCoordinator
+            case .context(let parentContext): context.parent = parentContext
+            case .coordinator(let storeCoordinator): context.persistentStoreCoordinator = storeCoordinator
             }
         }
         
@@ -155,25 +155,24 @@ public class CoreDataLocalStorage: Storage {
         return context
     }
     
-    private func initializeStore(store: StoreRef, coordinator: NSPersistentStoreCoordinator, migrate: Bool) throws -> NSPersistentStore {
+    fileprivate func initializeStore(_ store: StoreRef, coordinator: NSPersistentStoreCoordinator, migrate: Bool) throws -> NSPersistentStore {
         try checkStorePath(store)
-        let options = migrate ? OptionRef.Migration : OptionRef.Default
+        let options = migrate ? OptionRef.migration : OptionRef.default
         return try addStore(store, coordinator: coordinator, options: options.build())
     }
 
-    private func checkStorePath(store: StoreRef) throws {
-        if let path = store.location().URLByDeletingLastPathComponent {
-            try NSFileManager.defaultManager().createDirectoryAtURL(path, withIntermediateDirectories: true, attributes: nil)
-        }
+    fileprivate func checkStorePath(_ store: StoreRef) throws {
+        let path = store.location().deletingLastPathComponent()
+        try FileManager.default.createDirectory(at: path, withIntermediateDirectories: true, attributes: nil)
     }
 
-    private func addStore(store: StoreRef, coordinator: NSPersistentStoreCoordinator, options: [NSObject: AnyObject], retry: Bool = true) throws -> NSPersistentStore {
+    fileprivate func addStore(_ store: StoreRef, coordinator: NSPersistentStoreCoordinator, options: [AnyHashable: Any], retry: Bool = true) throws -> NSPersistentStore {
         var pstore: NSPersistentStore?
         var error: NSError?
         
-        coordinator.performBlockAndWait({
+        coordinator.performAndWait({
             do {
-                pstore = try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: store.location(), options: options)
+                pstore = try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: store.location() as URL, options: options)
             } catch let _error as NSError {
                 error = _error
             }
@@ -191,16 +190,16 @@ public class CoreDataLocalStorage: Storage {
             return pstore
         }
         
-        throw DkErrors.PersistentStoreInitilization
+        throw DkErrors.persistentStoreInitilization
     }
     
-    private func cleanStoreOnFailedMigration(store: StoreRef) throws {
+    fileprivate func cleanStoreOnFailedMigration(_ store: StoreRef) throws {
         let rawUrl: String = store.location().absoluteString
-        let shmSidecar: NSURL = NSURL(string: rawUrl.stringByAppendingString("-shm"))!
-        let walSidecar: NSURL = NSURL(string: rawUrl.stringByAppendingString("-wal"))!
-        try NSFileManager.defaultManager().removeItemAtURL(store.location())
-        try NSFileManager.defaultManager().removeItemAtURL(shmSidecar)
-        try NSFileManager.defaultManager().removeItemAtURL(walSidecar)
+        let shmSidecar: URL = URL(string: rawUrl + "-shm")!
+        let walSidecar: URL = URL(string: rawUrl + "-wal")!
+        try FileManager.default.removeItem(at: store.location() as URL)
+        try FileManager.default.removeItem(at: shmSidecar)
+        try FileManager.default.removeItem(at: walSidecar)
     }
 
 

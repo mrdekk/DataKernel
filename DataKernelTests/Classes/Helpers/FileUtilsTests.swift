@@ -14,7 +14,7 @@ class FileUtilsTests: XCTestCase {
     func testProperDocumentsDirectory() {
         let path = FileUtils.documents()
         
-        XCTAssertEqual(path, NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0], "should return the proper documents directory")
+        XCTAssertEqual(path, NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0], "should return the proper documents directory")
     }
     
 }

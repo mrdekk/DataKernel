@@ -8,8 +8,8 @@
 
 import Foundation
 
-public enum DkErrors: ErrorType {
-    case PersistentStoreInitilization // some errors during initialization of Core Data stack
-    case RecursiveSaveFailed // some errors in recursive save of dependent NSManagedObjectContexts
-    case InvalidEntityClass // class supplied to NSManagaedObjectContext as Context methods
+public enum DkErrors: Error {
+    case persistentStoreInitilization // some errors during initialization of Core Data stack
+    case recursiveSaveFailed // some errors in recursive save of dependent NSManagedObjectContexts
+    case invalidEntityClass // class supplied to NSManagaedObjectContext as Context methods
 }
