@@ -1,3 +1,9 @@
+### Version 0.3.0
+**Date:** 15th February 2016 <br />
+**Changelog**
+
+- updated for Swift 3
+
 ### Version 0.1.3
 **Date:** 5th May 2016 <br />
 **ChangeLog**
