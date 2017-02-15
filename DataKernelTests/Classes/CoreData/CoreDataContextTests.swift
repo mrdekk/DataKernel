@@ -19,9 +19,9 @@ class CoreDataContextTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        store = .Named("test2")
-        let bundle = NSBundle(forClass: self.classForCoder)
-        model = .Merged([bundle])
+        store = .named("test2")
+        let bundle = Bundle(for: self.classForCoder)
+        model = .merged([bundle])
         self.storage = try! CoreDataLocalStorage(store: store!, model: model!, migration: true)
     }
     

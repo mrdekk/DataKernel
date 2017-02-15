@@ -13,32 +13,32 @@ extension NSManagedObjectContext: Context {
     
     // MARK: - Context
     
-    public func fetch<E: Entity>(request: Request<E>) throws -> [E] {
+    public func fetch<E: Entity>(_ request: Request<E>) throws -> [E] {
         return try fetchImpl(request, includeProps: true)
     }
     
-    public func count<E: Entity>(request: Request<E>) throws -> Int {
+    public func count<E: Entity>(_ request: Request<E>) throws -> Int {
         let entities = try fetchImpl(request, includeProps: false)
         return entities.count
     }
     
     public func create<E: Entity>() throws -> E {
         guard let entityClass = E.self as? NSManagedObject.Type else {
-            throw DkErrors.InvalidEntityClass
+            throw DkErrors.invalidEntityClass
         }
 
-        let object = NSEntityDescription.insertNewObjectForEntityForName(entityClass.entityName, inManagedObjectContext: self)
+        let object = NSEntityDescription.insertNewObject(forEntityName: entityClass.entityName, into: self)
         if let inserted = object as? E {
             return inserted
         } else {
-            throw DkErrors.InvalidEntityClass
+            throw DkErrors.invalidEntityClass
         }
 
     }
     
     // TODO: may be it will be very usefull to fill the values of created entity with what is supplied to condition, but condition may be oneOf or anything
-    public func acquire<E: Entity>(value: AnyObject) throws -> E {
-        let pk = try pkKey(E)
+    public func acquire<E: Entity>(_ value: Any) throws -> E {
+        let pk = try pkKey(E.self)
         let condition = Request<E>().filter(pk, equalTo: value)
         let fetched = try fetch(condition)
         if fetched.count > 0 {
@@ -55,33 +55,33 @@ extension NSManagedObjectContext: Context {
         return entity
     }
     
-    public func remove<E: Entity>(entity: E) throws {
+    public func remove<E: Entity>(_ entity: E) throws {
         try remove([entity])
     }
     
-    public func remove<E: Entity>(entities: [E]) throws {
+    public func remove<E: Entity>(_ entities: [E]) throws {
         for entity in entities {
             guard let entity = entity as? NSManagedObject else {
                 continue
             }
             
-            deleteObject(entity)
+            delete(entity)
         }
     }
     
-    public func remove<E: Entity>(condition: Request<E>) throws {
+    public func remove<E: Entity>(_ condition: Request<E>) throws {
         let entities = try fetchImpl(condition, includeProps: false)
         try remove(entities)
     }
     
-    public func wipe<E: Entity>(type: E.Type) throws {
+    public func wipe<E: Entity>(_ type: E.Type) throws {
         if #available(iOS 9, OSX 10.11, *) {
             guard let entityClass = E.self as? NSManagedObject.Type else {
-                throw DkErrors.InvalidEntityClass
+                throw DkErrors.invalidEntityClass
             }
-            let request = NSFetchRequest(entityName: entityClass.entityName)
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityClass.entityName)
             let requestDelete = NSBatchDeleteRequest(fetchRequest: request)
-            try executeRequest(requestDelete)
+            try execute(requestDelete)
         } else {
             let request = Request<E>(sort: nil, predicate: nil)
             let entities = try fetchImpl(request, includeProps: false)
@@ -92,10 +92,10 @@ extension NSManagedObjectContext: Context {
     
     // MARK: - Special things
     
-    func save(recursively recursively: Bool) throws {
-        var _error: ErrorType!
+    func save(recursively: Bool) throws {
+        var _error: Error!
         
-        performBlockAndWait {
+        performAndWait {
             if self.hasChanges {
                 do {
                     try self.saveThisAndParentContext(recursively)
@@ -113,44 +113,44 @@ extension NSManagedObjectContext: Context {
     // MARK: - Observing things
     
     func observeToGetPermanentIDsBeforeSaving() {
-        NSNotificationCenter.defaultCenter().addObserverForName(NSManagedObjectContextWillSaveNotification, object: self, queue: nil, usingBlock: { [weak self] (notification) in
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.NSManagedObjectContextWillSave, object: self, queue: nil, using: { [weak self] (notification) in
             guard let strongSelf = self else {
                 return
             }
             if strongSelf.insertedObjects.count == 0 {
                 return
             }
-            _ = try? strongSelf.obtainPermanentIDsForObjects(Array(strongSelf.insertedObjects))
+            _ = try? strongSelf.obtainPermanentIDs(for: Array(strongSelf.insertedObjects))
         })
     }
     
-    func observeDidSaveNotification(inMainThread: Bool, saveNotification: (notification: NSNotification) -> Void) {
-        let queue: NSOperationQueue = inMainThread ? NSOperationQueue.mainQueue() : NSOperationQueue()
-        NSNotificationCenter.defaultCenter().addObserverForName(NSManagedObjectContextDidSaveNotification, object: self, queue: queue, usingBlock: saveNotification)
+    func observeDidSaveNotification(_ inMainThread: Bool, saveNotification: @escaping (_ notification: Notification) -> Void) {
+        let queue: OperationQueue = inMainThread ? OperationQueue.main : OperationQueue()
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.NSManagedObjectContextDidSave, object: self, queue: queue, using: saveNotification)
     }
     
     // MARK: - Private
     
-    func saveThisAndParentContext(recursively: Bool) throws {
+    func saveThisAndParentContext(_ recursively: Bool) throws {
         try save()
         
         if recursively {
-            if let parent = parentContext {
+            if let parent = parent {
                 try parent.save(recursively: recursively)
             }
         }
     }
     
-    func buildNSFetchRequest<E: Entity>(request: Request<E>) throws -> NSFetchRequest {
+    func buildNSFetchRequest<E: Entity>(_ request: Request<E>) throws -> NSFetchRequest<NSFetchRequestResult> {
         guard let entityClass = E.self as? NSManagedObject.Type else {
-            throw DkErrors.InvalidEntityClass
+            throw DkErrors.invalidEntityClass
         }
         
         return buildNSFetchRequest(entityClass.entityName, predicate: request.predicate, sort: request.sort)
     }
     
-    func buildNSFetchRequest(entityName: String, predicate: NSPredicate?, sort: NSSortDescriptor?) -> NSFetchRequest {
-        let request = NSFetchRequest(entityName: entityName)
+    func buildNSFetchRequest(_ entityName: String, predicate: NSPredicate?, sort: NSSortDescriptor?) -> NSFetchRequest<NSFetchRequestResult> {
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
         
         if let predicate = predicate {
             request.predicate = predicate
@@ -163,35 +163,35 @@ extension NSManagedObjectContext: Context {
         return request
     }
     
-    func fetchImpl<E: Entity>(request: Request<E>, includeProps: Bool = true) throws -> [E] {
+    func fetchImpl<E: Entity>(_ request: Request<E>, includeProps: Bool = true) throws -> [E] {
         let fetchRequest = try buildNSFetchRequest(request)
         fetchRequest.includesPropertyValues = includeProps
         
-        let results = try self.executeFetchRequest(fetchRequest)
+        let results = try self.fetch(fetchRequest)
         return results.map {$0 as! E}
     }
     
-    func pkKey<E: Entity>(type: E.Type) throws -> String {
+    func pkKey<E: Entity>(_ type: E.Type) throws -> String {
         guard let entityClass = E.self as? NSManagedObject.Type else {
-            throw DkErrors.InvalidEntityClass
+            throw DkErrors.invalidEntityClass
         }
         
-        let desc: NSEntityDescription? = NSEntityDescription.entityForName(entityClass.entityName, inManagedObjectContext: self)
+        let desc: NSEntityDescription? = NSEntityDescription.entity(forEntityName: entityClass.entityName, in: self)
         guard let idesc: NSEntityDescription = desc else {
-            throw DkErrors.InvalidEntityClass
+            throw DkErrors.invalidEntityClass
         }
 
         guard let pk = idesc.userInfo?["pk"] as? String else {
             assert(false, "to work with DataKernel entity should have pk info in userInfo")
-            throw DkErrors.InvalidEntityClass
+            throw DkErrors.invalidEntityClass
         }
         
         let pkDesc = idesc.attributesByName[pk]
         guard let ipkDesc: NSAttributeDescription = pkDesc else {
-            throw DkErrors.InvalidEntityClass
+            throw DkErrors.invalidEntityClass
         }
 
-        if !ipkDesc.indexed {
+        if !ipkDesc.isIndexed {
             assert(false, "pk found (\(pk)) but it is not indexed, that will be huge performance problems")
         }
 

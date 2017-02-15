@@ -41,8 +41,8 @@ class RequestTests: XCTestCase {
     }
     
     func testRequestSortWithKeyAndAscendingAndComparator() {
-        let descriptor = NSSortDescriptor(key: "model", ascending: true, comparator: { _ in return NSComparisonResult.OrderedSame })
-        let request: Request<Car> = Request().sort("model", ascending: true, comparator: { _ in return NSComparisonResult.OrderedSame })
+        let descriptor = NSSortDescriptor(key: "model", ascending: true, comparator: { _ in return ComparisonResult.orderedSame })
+        let request: Request<Car> = Request().sort("model", ascending: true, comparator: { _ in return ComparisonResult.orderedSame })
         
         XCTAssertEqual(descriptor.key, request.sort?.key)
         XCTAssertEqual(descriptor.ascending, request.sort?.ascending)
@@ -50,8 +50,8 @@ class RequestTests: XCTestCase {
     }
     
     func testRequestSortWithKeyAndAscendingAndSelector() {
-        let descriptor = NSSortDescriptor(key: "model", ascending: true, selector: Selector("selector"))
-        let request: Request<Car> = Request().sort("model", ascending: true, selector: Selector("selector"))
+        let descriptor = NSSortDescriptor(key: "model", ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
+        let request: Request<Car> = Request().sort("model", ascending: true, selector: #selector(NSString.localizedCaseInsensitiveCompare(_:)))
         
         XCTAssertEqual(descriptor.key, request.sort?.key)
         XCTAssertEqual(descriptor.ascending, request.sort?.ascending)

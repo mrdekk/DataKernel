@@ -10,18 +10,18 @@ import Foundation
 import CoreData
 
 public enum ModelRef {
-    case Named(String, NSBundle)
-    case Merged([NSBundle]?)
-    case URL(NSURL)
+    case named(String, Bundle)
+    case merged([Bundle]?)
+    case url(Foundation.URL)
     
     func build() -> NSManagedObjectModel? {
         switch self {
-        case .Named(let name, let bundle):
-            return NSManagedObjectModel(contentsOfURL: bundle.URLForResource(name, withExtension: "momd")!)
-        case .Merged(let bundles):
-            return NSManagedObjectModel.mergedModelFromBundles(bundles)
-        case .URL(let url):
-            return NSManagedObjectModel(contentsOfURL: url)
+        case .named(let name, let bundle):
+            return NSManagedObjectModel(contentsOf: bundle.url(forResource: name, withExtension: "momd")!)
+        case .merged(let bundles):
+            return NSManagedObjectModel.mergedModel(from: bundles)
+        case .url(let url):
+            return NSManagedObjectModel(contentsOf: url)
         }
         
     }
