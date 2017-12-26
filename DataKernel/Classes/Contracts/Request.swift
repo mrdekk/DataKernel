@@ -25,23 +25,23 @@ public struct Request<E: Entity> {
     
     // MARK: - Chaining specification methods
     
-    public func filter(_ key: String, equalTo value: Any) -> Request<E> {
+    public func filtered(_ key: String, equalTo value: Any) -> Request<E> {
         return self.redef(predicate: NSPredicate(format: "\(key) == %@", argumentArray: [value]))
     }
     
-    public func filter(_ key: String, oneOf value: [Any]) -> Request<E> {
+    public func filtered(_ key: String, oneOf value: [Any]) -> Request<E> {
         return self.redef(predicate: NSPredicate(format: "\(key) IN %@", argumentArray: [value]))
     }
     
-    public func sort(_ key: String?, ascending: Bool) -> Request<E> {
+    public func sorted(_ key: String?, ascending: Bool) -> Request<E> {
         return self.redef(sort: NSSortDescriptor(key: key, ascending: ascending))
     }
     
-    public func sort(_ key: String?, ascending: Bool, comparator cmptr: @escaping Comparator) -> Request<E> {
+    public func sorted(_ key: String?, ascending: Bool, comparator cmptr: @escaping Comparator) -> Request<E> {
         return self.redef(sort: NSSortDescriptor(key: key, ascending: ascending, comparator: cmptr))
     }
     
-    public func sort(_ key: String?, ascending: Bool, selector: Selector) -> Request<E> {
+    public func sorted(_ key: String?, ascending: Bool, selector: Selector) -> Request<E> {
         return self.redef(sort: NSSortDescriptor(key: key, ascending: ascending, selector: selector))
     }
     

@@ -65,7 +65,7 @@ class CoreDataContextTests: XCTestCase {
             save()
         })
         
-        let request: Request<Car> = Request().filter("mark", equalTo: "Honda")
+        let request: Request<Car> = Request().filtered("mark", equalTo: "Honda")
         let count = try! storage?.uiContext.count(request)
         
         XCTAssertEqual(count, 3)
@@ -121,7 +121,7 @@ class CoreDataContextTests: XCTestCase {
             save()
         })
         
-        let request: Request<Car> = Request().filter("model", equalTo: "CRZ")
+        let request: Request<Car> = Request().filtered("model", equalTo: "CRZ")
         let results = try! storage?.uiContext.fetch(request)
         let firstCar = results?.first
         
@@ -158,7 +158,7 @@ class CoreDataContextTests: XCTestCase {
             save()
         })
         
-        let request: Request<Car> = Request().filter("mark", equalTo: "Honda")
+        let request: Request<Car> = Request().filtered("mark", equalTo: "Honda")
         let results = try! storage?.uiContext.fetch(request)
         
         XCTAssertEqual(results?.count, 2)
@@ -187,7 +187,7 @@ class CoreDataContextTests: XCTestCase {
             save()
         })
         
-        let request: Request<Car> = Request().filter("mark", equalTo: "Honda")
+        let request: Request<Car> = Request().filtered("mark", equalTo: "Honda")
         let results = try! storage?.uiContext.fetch(request)
         
         XCTAssertEqual(results?.count, 2)
@@ -215,7 +215,7 @@ class CoreDataContextTests: XCTestCase {
             save()
         })
         
-        let request: Request<Car> = Request().filter("mark", equalTo: "Honda")
+        let request: Request<Car> = Request().filtered("mark", equalTo: "Honda")
         let results = try! storage?.uiContext.fetch(request)
         
         XCTAssertEqual(results?.count, 2)
