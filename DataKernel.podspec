@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = "DataKernel"
-  s.version          = "0.3.0"
-  s.summary          = "CoreData wrapper written on Swift 3"
+  s.version          = "0.4.0"
+  s.summary          = "CoreData wrapper written on Swift 4"
   s.homepage         = "https://github.com/mrdekk/DataKernel"
   s.license          = 'MIT'
   s.author           = { "MrDekk" => "mrdekk@yandex.ru" }
