@@ -16,7 +16,7 @@ If you have any propositions please file issue.
 If you need usage examples - see unit test, it is very straightforward
 
 ## Features
-- Swift (tested in xCode 7.2.1, xCode 7.3.0)
+- Swift (tested in XCode 9.1)
 - Protocols based design
 - Fully tested
 - Actively supported
@@ -65,9 +65,9 @@ Storage offer access to uiContext (NSManagedObjectContext on main thread to **GE
 #### Fetching data
 
 ```swift
-let cars: [Cars] = try! storage.uiContext.fetch(Request<Car>().filter("mark", equalTo: "Honda"))
+let cars: [Cars] = try! storage.uiContext.fetch(Request<Car>().filtered("mark", equalTo: "Honda"))
 let cars: [Cars] = try! storage.uiContext.fetch(Request<Car>())
-let cars: [Cars] = try! storage.uiContext.fetch(Request<Car>().sort("model", ascending: true))
+let cars: [Cars] = try! storage.uiContext.fetch(Request<Car>().sorted("model", ascending: true))
 
 let predicate = NSPredicate(format: "model == %@", "CRZ")
 let crz: Car? = try! storage.uiContext.fetch(Request<Car>(predicate: predicate)).first
@@ -135,7 +135,7 @@ In a similar way you can use the `remove()` method from the context passing the 
 ```swift
 do {
   storage.perform(true) { (context, save) throws -> Void in
-    let car: Car? = try! context.fetch(Request<Car>.filter("model", equalTo: "CRZ")).first
+    let car: Car? = try! context.fetch(Request<Car>.filtered("model", equalTo: "CRZ")).first
     if let car = car {
       try! context.remove([car])
       save()
@@ -166,7 +166,7 @@ This project adheres to the [Open Code of Conduct][code-of-conduct]. By particip
 ## License
 The MIT License (MIT)
 
-Copyright (c) <2014> <Pedro Piñera>
+Copyright (c) <2014> <Pedro Piñera>, <MrDekk>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
