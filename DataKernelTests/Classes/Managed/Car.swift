@@ -9,6 +9,8 @@
 import Foundation
 import CoreData
 
+@testable import DataKernel
 
 class Car: NSManagedObject {
 }
+
