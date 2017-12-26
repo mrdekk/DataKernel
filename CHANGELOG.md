@@ -1,5 +1,5 @@
 ### Version 0.4.0
-**Date:** 26th December 2017
+**Date:** 26th December 2017 <br />
 **Changelog**
 
 - updated for Swift 4
