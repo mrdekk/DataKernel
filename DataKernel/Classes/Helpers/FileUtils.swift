@@ -12,4 +12,8 @@ class FileUtils {
     static func documents() -> String {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
     }
+
+    static func documents(in appGroup: String) -> URL? {
+        return FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup)
+    }
 }
